@@ -4,7 +4,12 @@
     <title>Angular QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="styles.css">
+
+    <base href="/"></base>
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.5/css/bootstrap.min.css" integrity="sha384-AysaV+vQoT3kOAXZkl02PThvDr8HYKPZhNT5h/CXfBThSRXQ6jW5DO2ekP5ViFdi" crossorigin="anonymous">
+    <link rel="stylesheet" href="iseq-css/iseq-theme.css">
 
     <!-- Polyfill(s) for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
@@ -17,9 +22,17 @@
     <script>
       System.import('app').catch(function(err){ console.error(err); });
     </script>
+
+    <!-- sticky header -->
+    <style>
+      .affix {top: 0; width: 100%;}
+      .affix + .container-fluid {padding-top: 70px;}
+      a:not([href]):not([tabindex]) {color: white !important; text-decoration: none;}
+    </style>
+
   </head>
 
-  <body>
-    <my-app>Loading AppComponent content here ...</my-app>
+  <body class="palette-plain">
+    <my-app>Loading ...</my-app>
   </body>
 </html>

@@ -1,0 +1,3 @@
+[submodule "iseq-css"]
+	path = iseq-css
+	url = https://github.com/marpiech/iseq-css.git
