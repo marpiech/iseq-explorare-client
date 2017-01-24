@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PhenotypeService } from './phenotype.service';
 
 @Component({
   selector: 'my-app',
@@ -9,7 +10,7 @@ import { Component } from '@angular/core';
       <h1>explorare</h1>
     </div>
     <div class="col-xs-6 col-sm-2">
-      Phenotypes
+      Phenotypes {{phenotypeCount}}
     </div>
   </div>
   <div class="row pb-1">
@@ -37,4 +38,9 @@ import { Component } from '@angular/core';
 </div>
   `,
 })
-export class AppComponent  { name = 'Angular'; }
+export class AppComponent  {
+  phenotypeCount: number;
+  constructor (phenotypeService: PhenotypeService) {
+    phenotypeService.phenotypeCount.subscribe(value => {this.phenotypeCount = value;});
+  }
+}
