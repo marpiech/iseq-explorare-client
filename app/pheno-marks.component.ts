@@ -34,6 +34,12 @@ export class PhenoMarksComponent {
   }
 
   postItems() {
+    this.output = `
+      <div class="spinner">
+        <div class="bounce1"></div>
+        <div class="bounce2"></div>
+        <div class="bounce3"></div>
+      </div>`;
     this.phenotypeService.parseText(this.query);
   }
 

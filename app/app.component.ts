@@ -41,6 +41,6 @@ import { PhenotypeService } from './phenotype.service';
 export class AppComponent  {
   phenotypeCount: number;
   constructor (phenotypeService: PhenotypeService) {
-    phenotypeService.phenotypeCount.subscribe(value => {this.phenotypeCount = value;});
+    phenotypeService.phenotypes.subscribe(value => {this.phenotypeCount = value.length;});
   }
 }
