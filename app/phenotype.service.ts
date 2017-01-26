@@ -29,6 +29,16 @@ export class PhenotypeService {
                   console.log(result.hpoTerms);});
   }
 
+  getPhenotypesByDisease(disease: string) {
+    var parsedDisease = disease.replace(/ /g, '%20');
+    var url = "http://localhost:8080/get-phenotypes-by-disease?disease="+parsedDisease;
+    this.http.get(url)
+              .map(response => response.json())
+              .subscribe(result =>
+                { this.phenotypes.next(<Phenotype[]> result.results[0]);
+                  console.log(result.hpoTerms);});
+  }
+
   constructor( private http: Http ) { }
 
 }

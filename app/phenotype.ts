@@ -1,8 +1,14 @@
 export class Phenotype {
 
+  //public id : string;
+
+  /*public getId() : string {
+    return this.id;
+  }*/
+
   constructor (
-    id: string,
-    name: string,
+    public id: string,
+    public name: string,
   ) {}
 
 }

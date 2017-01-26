@@ -9,12 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   selector: 'my-pheno-marks',
   template: `
   <div class="row pb-1">
-    <div class="col-xs-9">
+    <div class="col-sm-9">
       <textarea [(ngModel)]="query" rows="5" class="border-no width-full" placeholder="Paste epicrysis here" (change)=postItems()></textarea>
     </div>
-    <div class="col-xs-3">
-      <a class="btn btn-info width-full mb-1" (click)=example()>example</a>
-      <a class="btn btn-success width-full mb-1" (click)=postItems()>submit</a>
+    <div class="col-sm-3">
+      <a class="btn btn-info width-full mb-1" style="color:white;" (click)=example()>example</a>
+      <a class="btn btn-success width-full mb-1" style="color:white;" (click)=postItems()>submit</a>
     </div>
   </div>
   <div class="row pb-1">

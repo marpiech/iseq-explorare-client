@@ -2,11 +2,13 @@ import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
 import { PhenoMarksComponent }   from './pheno-marks.component';
+import { SimilarDiseasesComponent }   from './similar-diseases.component';
 import { PhenoPanelComponent }   from './pheno-panel.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/pheno-marks', pathMatch: 'full' },
   { path: 'pheno-marks',  component: PhenoMarksComponent },
+  { path: 'similar-diseases',  component: SimilarDiseasesComponent },
   { path: 'pheno-panel',     component: PhenoPanelComponent }
 ];
 

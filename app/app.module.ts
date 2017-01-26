@@ -3,24 +3,31 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 
-import { AppComponent }         from './app.component';
-import { PhenoMarksComponent }   from './pheno-marks.component';
-import { PhenoPanelComponent }   from './pheno-panel.component';
+import { AppComponent }             from './app.component';
+import { PhenoMarksComponent }      from './pheno-marks.component';
+import { SimilarDiseasesComponent } from './similar-diseases.component';
+import { PhenoPanelComponent }      from './pheno-panel.component';
+
 
 import { PhenotypeService } from './phenotype.service';
 
 import { AppRoutingModule }     from './app-routing.module';
+
+/*** extra ***/
+import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
 @NgModule({
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
-    AppRoutingModule
+    AppRoutingModule,
+    Ng2AutoCompleteModule
   ],
   declarations: [
     AppComponent,
     PhenoMarksComponent,
+    SimilarDiseasesComponent,
     PhenoPanelComponent
   ],
   providers: [ PhenotypeService ],
