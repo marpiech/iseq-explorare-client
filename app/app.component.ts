@@ -10,7 +10,7 @@ import { PhenotypeService } from './phenotype.service';
       <h1>explorare</h1>
     </div>
     <div class="col-sm-2">
-      Phenotypes {{phenotypeCount}}
+      Phenotypes <span class="badge badge-pill badge-success">{{phenotypeCount}}</span>
     </div>
   </div>
   <div class="row pb-1">

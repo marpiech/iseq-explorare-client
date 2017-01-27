@@ -14,8 +14,15 @@ export class PhenotypeService {
   /*** phenotypes ***/
   phenotypes = new BehaviorSubject<Phenotype[]>([]);
 
+  /*** getters & setters ***/
+  addPhenotype(phenotype : Phenotype) {
+    var updatedPhenotypes : Phenotype[] = this.phenotypes.value;
+    updatedPhenotypes.push(phenotype);
+    this.phenotypes.next(updatedPhenotypes);
+    //this.phenotypes;
+  }
 
-  /*** REQUESTS ***/
+  /*** requests ***/
   parseText(query: string) {
     var data = JSON.stringify({ "query": query });
     var headers = new Headers();
