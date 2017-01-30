@@ -12,6 +12,12 @@ import { PhenotypeService } from './phenotype.service';
     <div class="col-sm-2">
       Phenotypes <span class="badge badge-pill badge-success">{{phenotypeCount}}</span>
     </div>
+    <div class="col-sm-2">
+      Diseases <span class="badge badge-pill badge-success">{{diseaseCount}}</span>
+    </div>
+    <div class="col-sm-2">
+      Genes <span class="badge badge-pill badge-success">{{geneCount}}</span>
+    </div>
   </div>
   <div class="row pb-1">
 
@@ -43,7 +49,11 @@ import { PhenotypeService } from './phenotype.service';
 })
 export class AppComponent  {
   phenotypeCount: number;
+  diseaseCount: number;
+  geneCount: number;
   constructor (phenotypeService: PhenotypeService) {
     phenotypeService.phenotypes.subscribe(value => {this.phenotypeCount = value.length;});
+    phenotypeService.diseases.subscribe(value => {this.diseaseCount = value.length;});
+    phenotypeService.genes.subscribe(value => {this.geneCount = value.length;});
   }
 }

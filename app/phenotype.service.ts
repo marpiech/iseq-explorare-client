@@ -1,9 +1,11 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import { BehaviorSubject }    from 'rxjs/BehaviorSubject';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/operator/map';
 import 'rxjs/Rx';
 import { Phenotype } from './phenotype';
+import { Disease } from './disease';
+import { Gene } from './gene';
 
 @Injectable()
 export class PhenotypeService {
@@ -13,6 +15,8 @@ export class PhenotypeService {
 
   /*** phenotypes ***/
   phenotypes = new BehaviorSubject<Phenotype[]>([]);
+  diseases = new BehaviorSubject<Disease[]>([]);
+  genes = new BehaviorSubject<Gene[]>([]);
 
   /*** getters & setters ***/
   addPhenotype(phenotype : Phenotype) {
@@ -46,6 +50,39 @@ export class PhenotypeService {
                   console.log(result.hpoTerms);});
   }
 
-  constructor( private http: Http ) { }
+  getDiseasesByPhenotypes(phenotypes : Phenotype[]) {
+    //console.log("disease request");
+    var data = "{ \"hpoTerms\": " + JSON.stringify(phenotypes) + " }";
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    //console.log(this.query);
+    this.http.post('http://localhost:8080/get-diseases', data, {headers: headers})
+              .map(response => response.json())
+              .subscribe(result =>
+                { //this.parsedText.next(result.markedText);
+                  this.diseases.next(<Disease[]> result);
+                  //console.log(result);
+                  console.log("disease request completed");});
+  }
+
+  getGenesByPhenotypes(phenotypes : Phenotype[]) {
+    //console.log("disease request");
+    var data = "{ \"hpoTerms\": " + JSON.stringify(phenotypes) + " }";
+    var headers = new Headers();
+    headers.append('Content-Type', 'application/json');
+    //console.log(this.query);
+    this.http.post('http://localhost:8080/get-genes', data, {headers: headers})
+              .map(response => response.json())
+              .subscribe(result =>
+                { //this.parsedText.next(result.markedText);
+                  this.genes.next(<Disease[]> result);
+                  //console.log(result);
+                  console.log("gene request completed");});
+  }
+
+  constructor( private http: Http ) {
+    this.phenotypes.subscribe(value => this.getDiseasesByPhenotypes(value));
+    this.phenotypes.subscribe(value => this.getGenesByPhenotypes(value));
+  }
 
 }
