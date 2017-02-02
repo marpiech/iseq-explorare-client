@@ -1,4 +1,4 @@
-import { Injectable, OnInit } from '@angular/core';
+import { Injectable, Inject, OnInit } from '@angular/core';
 import { BehaviorSubject }    from 'rxjs/BehaviorSubject';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/operator/map';
@@ -6,6 +6,8 @@ import 'rxjs/Rx';
 import { Phenotype } from './phenotype';
 import { Disease } from './disease';
 import { Gene } from './gene';
+
+import { APP_CONFIG, IAppConfig } from './app.config';
 
 @Injectable()
 export class PhenotypeService {
@@ -32,7 +34,7 @@ export class PhenotypeService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     //console.log(this.query);
-    this.http.post('http://localhost:8080/parse-text', data, {headers: headers})
+    this.http.post(this.config.apiEndpoint + '/parse-text', data, {headers: headers})
               .map(response => response.json())
               .subscribe(result =>
                 { this.parsedText.next(result.markedText);
@@ -42,7 +44,7 @@ export class PhenotypeService {
 
   getPhenotypesByDisease(disease: string) {
     var parsedDisease = disease.replace(/ /g, '%20');
-    var url = "http://localhost:8080/get-phenotypes-by-disease?disease="+parsedDisease;
+    var url = this.config.apiEndpoint + "/get-phenotypes-by-disease?disease="+parsedDisease;
     this.http.get(url)
               .map(response => response.json())
               .subscribe(result =>
@@ -56,7 +58,7 @@ export class PhenotypeService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     //console.log(this.query);
-    this.http.post('http://localhost:8080/get-diseases', data, {headers: headers})
+    this.http.post(this.config.apiEndpoint + '/get-diseases', data, {headers: headers})
               .map(response => response.json())
               .subscribe(result =>
                 { //this.parsedText.next(result.markedText);
@@ -71,7 +73,7 @@ export class PhenotypeService {
     var headers = new Headers();
     headers.append('Content-Type', 'application/json');
     //console.log(this.query);
-    this.http.post('http://localhost:8080/get-genes', data, {headers: headers})
+    this.http.post(this.config.apiEndpoint + '/get-genes', data, {headers: headers})
               .map(response => response.json())
               .subscribe(result =>
                 { //this.parsedText.next(result.markedText);
@@ -80,7 +82,8 @@ export class PhenotypeService {
                   console.log("gene request completed");});
   }
 
-  constructor( private http: Http ) {
+  constructor( private http: Http,
+  @Inject(APP_CONFIG) private config: IAppConfig ) {
     this.phenotypes.subscribe(value => this.getDiseasesByPhenotypes(value));
     this.phenotypes.subscribe(value => this.getGenesByPhenotypes(value));
   }

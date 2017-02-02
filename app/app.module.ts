@@ -3,18 +3,24 @@ import { BrowserModule }  from '@angular/platform-browser';
 import { FormsModule }    from '@angular/forms';
 import { HttpModule }     from '@angular/http';
 
+/*** config ***/
+import { APP_CONFIG, AppConfig } from './app.config';
+
+/*** components ***/
 import { AppComponent }             from './app.component';
 import { PhenoMarksComponent }      from './pheno-marks.component';
 import { SimilarDiseasesComponent } from './similar-diseases.component';
 import { PhenoPanelComponent }      from './pheno-panel.component';
 
-
+/*** services ***/
 import { PhenotypeService } from './phenotype.service';
 
+/*** routing ***/
 import { AppRoutingModule }     from './app-routing.module';
 
-/*** extra ***/
+/*** utils ***/
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
+
 
 @NgModule({
   imports: [
@@ -22,7 +28,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    Ng2AutoCompleteModule
+    Ng2AutoCompleteModule,
   ],
   declarations: [
     AppComponent,
@@ -30,7 +36,8 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     SimilarDiseasesComponent,
     PhenoPanelComponent
   ],
-  providers: [ PhenotypeService ],
+  providers: [ PhenotypeService,
+              { provide: APP_CONFIG, useValue: AppConfig } ],
   bootstrap: [ AppComponent ]
 })
 export class AppModule { }

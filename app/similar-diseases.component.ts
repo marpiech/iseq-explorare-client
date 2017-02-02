@@ -1,9 +1,11 @@
-import { Component, Input, Injectable } from '@angular/core';
+import { Component, Input, Inject, Injectable } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import 'rxjs/operator/map';
 import 'rxjs/Rx';
 import { PhenotypeService } from './phenotype.service';
 import { ActivatedRoute } from '@angular/router';
+
+import { APP_CONFIG, IAppConfig } from './app.config';
 
 @Component({
   selector: 'my-similar-diseases',
@@ -39,8 +41,9 @@ export class SimilarDiseasesComponent {
     this.phenotypeService.getPhenotypesByDisease(disease);
   }
 
-  diseaseAutocompleteAdress: string = "http://localhost:8080/disease-autocomplete?firstLetters=:keyword&resultsCount=10";
+  diseaseAutocompleteAdress: string = this.config.apiEndpoint + "/disease-autocomplete?firstLetters=:keyword&resultsCount=10";
 
-  constructor(private phenotypeService: PhenotypeService) {}
+  constructor(private phenotypeService: PhenotypeService,
+  @Inject(APP_CONFIG) private config: IAppConfig) {}
 
 }
