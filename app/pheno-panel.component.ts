@@ -16,6 +16,8 @@ import { APP_CONFIG, IAppConfig } from './app.config';
 @Component({
   selector: 'my-pheno-panel',
   template: `
+
+
   <div class="row pb-1">
   <div class="col-sm-3">
       add phenotype<input  ng2-auto-complete
@@ -75,7 +77,10 @@ import { APP_CONFIG, IAppConfig } from './app.config';
       </ul>
     </div>
     <div class="col-sm-2 pt-2">
+      <button class="btn btn-default" type="button" ngxClipboard [cbContent]="genesText">copy</button>
+
       <h5>Genes <span class="badge badge-pill badge-default">% match</span></h5>
+
       <ul>
         <li *ngFor="let gene of genes">
           {{gene.name}} <span class="badge badge-pill badge-default">{{gene.score.toFixed(1)}}</span>
@@ -173,6 +178,7 @@ styles: [`
 })
 export class PhenoPanelComponent  {
 
+  genesText : string;
   phenotypes : Phenotype[];
   diseases : Disease[];
   genes : Gene[];
@@ -244,6 +250,16 @@ export class PhenoPanelComponent  {
     }
   }
 
+  getGeneNames(genes : Gene[]) {
+    var output : string = "";
+    for (let gene of genes) {
+      //console.log("name:")
+      //console.log(gene.name)
+      output = output + gene.name + "\n"; // 1, "string", false
+    }
+    this.genesText = output;
+  }
+
   constructor(private phenotypeService: PhenotypeService,
     @Inject(APP_CONFIG) private config: IAppConfig,
     private http: Http,
@@ -253,7 +269,10 @@ export class PhenoPanelComponent  {
       this.phenotypes = value
     });
     phenotypeService.diseases.subscribe(value => this.diseases = value);
-    phenotypeService.genes.subscribe(value => this.genes = value);
+    phenotypeService.genes.subscribe(value => {
+      this.genes = value;
+      this.getGeneNames(value);
+    });
     this.dialogPhenotype.subscribe(value => {
       console.log("constructorSubscribeDialogPhenotype: " + value);
       this.getPhenotype(value);

@@ -21,6 +21,8 @@ import { AppRoutingModule }     from './app-routing.module';
 /*** utils ***/
 import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
 
+/*** clipboard ***/
+import { ClipboardModule } from 'ngx-clipboard';
 
 @NgModule({
   imports: [
@@ -29,6 +31,7 @@ import { Ng2AutoCompleteModule } from 'ng2-auto-complete';
     HttpModule,
     AppRoutingModule,
     Ng2AutoCompleteModule,
+    ClipboardModule
   ],
   declarations: [
     AppComponent,

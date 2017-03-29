@@ -12,7 +12,7 @@
     map: {
       // our app is within the app folder
       app: 'app',
-
+      //clipboard: 'clipboard.js',
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
@@ -26,7 +26,9 @@
       // other libraries
       'rxjs':                      'npm:rxjs',
       'angular-in-memory-web-api': 'npm:angular-in-memory-web-api/bundles/in-memory-web-api.umd.js',
-      'ng2-auto-complete': 'node_modules/ng2-auto-complete/dist'
+      'ng2-auto-complete': 'node_modules/ng2-auto-complete/dist',
+      'clipboard': 'node_modules/clipboard/dist/clipboard.js',
+      'ngx-clipboard': 'node_modules/ngx-clipboard/dist/bundles/ngxClipboard.umd.min.js'
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
@@ -40,6 +42,9 @@
       'ng2-auto-complete': {
         main: 'ng2-auto-complete.umd.js',
         defaultExtension: 'js',
+      },
+      'clipboard': {
+        defaultExtension: 'js'
       }
     }
   });

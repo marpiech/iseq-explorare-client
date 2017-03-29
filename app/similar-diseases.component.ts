@@ -30,7 +30,7 @@ import { APP_CONFIG, IAppConfig } from './app.config';
   `,
   styles: [`
     ng2-auto-complete, input {
-      display: block; border: 0px solid #ccc; width: 300px;
+      display: block; border: 0px solid #ccc; width: 600px;
     }
   `],
 })
@@ -41,7 +41,7 @@ export class SimilarDiseasesComponent {
     this.phenotypeService.getPhenotypesByDisease(disease);
   }
 
-  diseaseAutocompleteAdress: string = this.config.apiEndpoint + "/disease-autocomplete?firstLetters=:keyword&resultsCount=10";
+  diseaseAutocompleteAdress: string = this.config.apiEndpoint + "/disease-autocomplete?firstLetters=:keyword&resultsCount=20";
 
   constructor(private phenotypeService: PhenotypeService,
   @Inject(APP_CONFIG) private config: IAppConfig) {}
